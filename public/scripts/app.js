@@ -12,11 +12,7 @@ angular.module('todoListApp', [])
   $scope.addTodo = function() {
     $scope.todos.unshift({name: "This is a new todo.",
                       completed: false});
-  };
-  
-})
-
-
+  };})
 .controller('todoCtrl', function($scope, dataService) {
   $scope.deleteTodo = function(todo, index) {
     $scope.todos.splice(index, 1);
@@ -30,17 +26,13 @@ angular.module('todoListApp', [])
       };
     })
     dataService.saveTodos(filteredTodos);
-  }; 
-})
-
+  };})
 .directive('todo', function(){
   return {
     templateUrl: '/templates/todo.html',
     replace: true,
     controller: 'todoCtrl'
-  }
-})
-
+  }})
 .service('dataService', function($http) {
   this.getTodos = function(cb) {
     $http.get('/mock/todos.json').then(cb);
@@ -52,10 +44,7 @@ angular.module('todoListApp', [])
   
   this.saveTodos = function(todos) {
     console.log("I saved " + todos.length + " todos!");
-  };
-  
-})
-
+  };})
 ;
 
 
@@ -63,10 +52,29 @@ angular.module('todoListApp', [])
 angular.module('feAdmin', [])
 
 .controller('mainCtrl', function($scope){
-
 })
 
-.controller('feAdminAddLitCtrl', function($scope){
+.controller('feAdminAddLitCtrl', function($scope, dataService){
+  $scope.defaults = {
+    "featured": false,
+    "format": ""
+  };
+
+  dataService.getFormats(function(res){
+    $scope.formats = res.data;
+    $scope.defaults.format = $scope.formats[2];
+    $scope.resetForm();
+  });
+
+  $scope.resetForm = function(blankForm){
+    $scope.lit = {
+      "featured": $scope.defaults.featured,
+      "format": $scope.defaults.format
+    };
+  }
+})
+
+.controller('feAdminModLitCtrl', function($scope){
   var defaults = {
     "featured": false
   }
@@ -82,9 +90,15 @@ angular.module('feAdmin', [])
   }
 })
 
-.directive('feNavAdmin', function(){
+.service('dataService', function($http){
+  this.getFormats = function(cb){
+    $http.get('/mock/formats.json').then(cb);
+  }
+})
+
+.directive('feAdminTopNav', function(){
   return {
-    templateUrl:'/templates/nav-admin.html',
+    templateUrl: '/templates/admin-top-nav.html',
     replace: true
   }
 })
@@ -92,7 +106,19 @@ angular.module('feAdmin', [])
 .directive('feAddLitModal', function(){
   return {
     templateUrl: '/templates/add-lit-modal.html',
+    scope: {},
+    controller: 'feAdminAddLitCtrl',
     replace: false
   }
 })
+
+.directive('feModLitModal', function(){
+  return {
+    templateUrl: '/templates/mod-lit-modal.html',
+    scope: {},
+    controller: 'feAdminModLitCtrl',
+    replace: false
+  }
+})
+
 ;

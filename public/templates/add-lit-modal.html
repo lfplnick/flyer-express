@@ -1,0 +1,61 @@
+<!-- Modal -->
+<div class="modal fade" id="newLit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add New Literature</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+              <label class="radio-inline">
+                <input type="radio" ng-model="lit.type" name="radio-litType" value="flyer" checked>Flyer
+              </label>
+              <label class="radio-inline">
+                <input type="radio" ng-model="lit.type" name="radio-litType" value="form">Form
+              </label>
+              </div>
+              <div class="col-md-8">
+                <!-- <select name="select-format" class="form-control" id="blah" ng-model="lit.format">
+                </select> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+          <label for="select-format">Format</label>
+          <select name="select-format" ng-options="format as format.format for format in formats" ng-model="lit.format"></select>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-3">
+                <label class="checkbox-inline">
+                  <input type="checkbox" class="" ng-model="lit.featured" ng-true-value="true" ng-false-value="false">Featured
+                </label>
+              </div>
+            </div>
+            <div ng-show="lit.featured" class="row">
+              <div class="col-md-offset-1">
+                <label for="dateFeatExp">No longer featured after:</label>
+                <input name="dateFeatExp" type="date" ng-model="lit.date">
+              </div>
+            </div>
+          </div>
+
+        </form>
+        {{lit}}
+        <hr>
+        {{selected}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="resetForm()">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
