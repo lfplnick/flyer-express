@@ -7,25 +7,44 @@
   margin-top: -10px;
 }
 
-/* Set colors */
+/* === Set colors === */
+/* Navbar */
 #nav-flyers-top {
   background-color: #c9cacc;
 }
 
+/* Active nav link */
 #nav-flyers-top .active a {
   color: #eee;
   background-color: #005daa;
 }
 
+/* Default nav link */
 #nav-flyers-top a {
   color: #000;
-  background-color: green;
+  /*background-color: green;*/
 }
 
+/* Open toggle color */
 #nav-flyers-top .open a.dropdown-toggle {
-  background-color: magenta;
+  background-color: #969799;
 }
 
+/* Dropdown menu */
 #nav-flyers-top ul.dropdown-menu {
-  background-color: cyan;
+  border: 0px;
+  border-top: 2px solid #b8b9bb;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: #c9cacc;
+}
+
+@media (min-width: 768px) {
+  #nav-flyers-top ul.dropdown-menu {
+    border-bottom: 2px solid #b8b9bb;
+  }
+
+  #nav-flyers-top ul.navbar-right {
+    margin-right: 10px;
+  }
 }
