@@ -57,7 +57,8 @@ angular.module('feAdmin', [])
 .controller('feAdminAddLitCtrl', function($scope, dataService){
   $scope.defaults = {
     "featured": false,
-    "format": ""
+    "format": "",
+    "type": "form"
   };
 
   dataService.getFormats(function(res){
@@ -69,7 +70,8 @@ angular.module('feAdmin', [])
   $scope.resetForm = function(blankForm){
     $scope.lit = {
       "featured": $scope.defaults.featured,
-      "format": $scope.defaults.format
+      "format": $scope.defaults.format,
+      "type": $scope.defaults.type
     };
   }
 })
