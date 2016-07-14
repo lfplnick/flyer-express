@@ -55,10 +55,15 @@ angular.module('feAdmin', [])
 })
 
 .controller('feAdminAddLitCtrl', function($scope, dataService){
+  console.log("this isn't the console you're looking for...");
   $scope.defaults = {
-    "featured": false,
+    "type": "flyer",
     "format": "",
-    "type": "form"
+    "isOngoing": false,
+    "dateEvent": new Date(),
+    "isFeatured": false,
+    "dateExpires": new Date(),
+    "locations": [{"id":-1, "location": ""}]
   };
 
   dataService.getFormats(function(res){
@@ -67,27 +72,60 @@ angular.module('feAdmin', [])
     $scope.resetForm();
   });
 
-  $scope.resetForm = function(blankForm){
+  dataService.getLocationList(function(res){
+    $scope.locationList = res.data;
+  });
+
+  $scope.resetForm = function(){
     $scope.lit = {
-      "featured": $scope.defaults.featured,
+      "type": $scope.defaults.type,
       "format": $scope.defaults.format,
-      "type": $scope.defaults.type
+      "isOngoing": $scope.defaults.isOngoing,
+      "dateEvent": $scope.defaults.dateEvent,
+      "isFeatured": $scope.defaults.isFeatured,
+      "dateExpires": $scope.defaults.dateExpires,
+      "locations": [{"id":-1, "location": ""}]
     };
+
+    // $scope.lit.locations.push($scope.locationList[0]);
+    // $scope.lit.locations.push($scope.locationList[1]);
+    
+  };
+
+  $scope.addLocationSelector = function(key){
+    // $scope.lit.locations.push($scope.locationList[key]);
+    var length = $scope.lit.locations.length;
+    if ($scope.lit.locations[length - 1].location !== '') {
+      $scope.lit.locations.push({"id":-1, "location": ""});
+    }
+    // $scope.lit.locations.unshift($scope.locationList.splice(key, 1));    
+  };
+
+  $scope.rmLocationSelector = function(key){
+    if ($scope.lit.locations.length > 1) {
+      $scope.lit.locations.splice(key, 1);
+    } else {
+      $scope.lit.locations = [{"id":-1, "location":''}];
+    }
+  };
+
+  $scope.resetLocations = function(){
+    $scope.lit.locations = [{"id":-1, "location": ""}];
   }
 })
 
 .controller('feAdminModLitCtrl', function($scope){
   var defaults = {
-    "featured": false
+    "isFeatured": false
   }
 
   $scope.lit = {
-    "featured": defaults.featured
+    "isFeatured": defaults.isFeatured
   };
 
   $scope.resetForm = function(blankForm){
     $scope.lit = {
-      "featured": defaults.featured
+      "isFeatured": defaults.isFeatured
     };
   }
 })
@@ -95,7 +133,11 @@ angular.module('feAdmin', [])
 .service('dataService', function($http){
   this.getFormats = function(cb){
     $http.get('/mock/formats.json').then(cb);
-  }
+  };
+
+  this.getLocationList = function(cb){
+    $http.get('/mock/locationList.json').then(cb);
+  };
 })
 
 .directive('feAdminTopNav', function(){

@@ -29,11 +29,11 @@
             <div class="row">
               <div class="col-md-3">
                 <label class="checkbox-inline">
-                  <input type="checkbox" class="" ng-model="lit.featured" ng-true-value="true" ng-false-value="false">Featured
+                  <input type="checkbox" class="" ng-model="lit.isFeatured" ng-true-value="true" ng-false-value="false">Featured
                 </label>
               </div>
             </div>
-            <div ng-show="lit.featured" class="row">
+            <div ng-show="lit.isFeatured" class="row">
               <div class="col-md-offset-1">
                 <label for="dateFeatExp">No longer featured after:</label>
                 <input name="dateFeatExp" type="date" ng-model="lit.date">

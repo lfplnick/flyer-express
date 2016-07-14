@@ -48,3 +48,55 @@
     margin-right: 10px;
   }
 }
+
+
+/* ========================================================================== */
+/* Admin - Add Literature Form                                                */
+/* ========================================================================== */
+
+/* === Layout === */
+
+/* Location selection*/
+/* Select boxes */
+#fe-add-lit-locations select {
+  max-width: 200px;
+  display: inline-block;
+}
+
+/* Circle buttons */
+#fe-add-lit-locations button.add,
+#fe-add-lit-locations button.delete {
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+}
+
+/* Location rows */
+#fe-add-lit-locations .row {
+  margin-top: 5px;
+}
+
+/* Static location labels*/
+#fe-add-lit-locations label {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Add new location buttons */
+#fe-add-lit-locations button.add {
+  padding: 2px 0 0 2px;
+}
+
+/* Delete location buttons */
+#fe-add-lit-locations button.delete {
+  margin:0 6px;
+  padding: 2px 2px 0 0;
+}
+
+/* Delete all locations button */
+#fe-add-lit-locations button.rm-all {
+  font-weight: 800;
+  font-size: 20px;
+
+}
