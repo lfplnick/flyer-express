@@ -64,7 +64,7 @@
             </div>
           </div>
 
-
+          <!-- Location selectors -->
           <div class="form-group">
             <label>Locations:</label>
             <div class="form-group-inline" id="fe-add-lit-locations">
@@ -77,18 +77,16 @@
                     <button type="button" class="delete btn btn-danger" aria-label="remove location" ng-hide="location.location===''"><span class="glyphicon glyphicon-minus" aria-hidden="true" ng-click="rmLocationSelector(key)"></span></button>
                     <select name="select-locations" class="form-control" ng-options="location as location.location for location in locationList" ng-model="lit.locations[key]" ng-change="addLocationSelector()" ng-show="location.location===''"/>
                     <label ng-hide="location.location===''" style="vertical-align: center">{{location.location}}</label>
-    <!-- 
-                    <button type="button" class="add btn btn-success" aria-label="add location" ng-show="lit.locations.length===(key+1)" ng-click="addLocationSelector()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-     -->
                   </div>
                 </div>
               </div>
             </div>
-<!-- 
-              <div>
-                <select name="select-locations" class="form-control" ng-options="location as location.location for location in locationList" ng-model="lit.locations"/>
-              </div>
- -->
+          </div>
+
+          <!-- Picture -->
+          <div class="form-group">
+            <label for="file-pic">Select picture</label>
+            <input type="file" ng-model="lit.thumbPic"/>
           </div>
 
         </form>
@@ -99,7 +97,8 @@
         Event Date: {{lit.dateEvent}}<br>
         Featured? {{lit.isFeatured}}<br>
         Feature expires: {{lit.dateExpires}}<br>
-        Locations: {{lit.locations}}
+        Locations: {{lit.locations}}<br>
+        Thumb Pic: {{lit.thumbPic}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="resetForm()">Close</button>
