@@ -65,7 +65,7 @@ angular.module('feAdmin', [])
     "dateExpires": new Date(),
     "locations": [{"id":-1, "location": ""}],
     "thumb": "empty.jpg",
-    "myFile": ""
+    "thumbFile": ""
   };
 
   dataService.getFormats(function(res){
@@ -80,7 +80,7 @@ angular.module('feAdmin', [])
 
 
   $scope.uploadFile = function(){
-    var file = $scope.lit.myFile;
+    var file = $scope.lit.thumbFile;
     var uploadUrl = '/api/fup';
     var fd = new FormData();
     fd.append('file', file);
@@ -106,7 +106,7 @@ angular.module('feAdmin', [])
       "dateExpires": $scope.defaults.dateExpires,
       "locations": [{"id":-1, "location": ""}],
       "thumb": $scope.defaults.thumb,
-      "myFile": $scope.defaults.myFile
+      "thumbFile": $scope.defaults.thumbFile
     };
 
     // $scope.lit.locations.push($scope.locationList[0]);

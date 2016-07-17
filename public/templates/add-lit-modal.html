@@ -22,6 +22,15 @@
             </div>
           </div>
 
+          <!-- Title and description -->
+          <div class="form-group">
+            <label for="input-title">Title</label>
+            <input type="text" class="form-control" ng-model="lit.title" name="title" id="input-title" placeholder="Flyer Title"/>
+
+            <label>Description</label>
+            <textarea class="form-control" rows="3" ng-model="lit.desc" placeholder="Brief description of flyer..."></textarea>
+          </div>
+
           <!-- Format select box -->
           <div class="form-group">
             <label for="select-format">Format</label>
@@ -92,16 +101,25 @@
                 </div>
                 <div>
                   <label for="file-pic">Select picture</label>
-                  <input type="file" file-model="lit.myFile" id="file-pic" name="file-pic" ng-model="lit.thumbPic" />
+                  <input type="file" file-model="lit.thumbFile" name="file-pic" />
                   <button type="button" class="btn btn-default" ng-click="uploadFile()">Start upload!</button>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- File upload -->
+          <div class="form-group">
+            <label for="file-pic">Select document file</label>
+            <input type="file" file-model="lit.documentFile" name="file-pic" />
+          </div>
+
         </form>
 
         <hr>
         Type: {{lit.type}}<br>
+        Title: {{lit.title}}<br>
+        Desc:  {{lit.desc}}<br>
         Format: {{lit.format}}<br>
         Ongoing? {{lit.isOngoing}}<br>
         Event Date: {{lit.dateEvent}}<br>
@@ -109,7 +127,8 @@
         Feature expires: {{lit.dateExpires}}<br>
         Locations: {{lit.locations}}<br>
         Thumb Pic: {{lit.thumb}}<br>
-        myFile: {{lit.myFile.name}}
+        thumbFile: {{lit.thumbFile.name}}<br>
+        documentFile: {{lit.documentFile.name}}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="resetForm()">Close</button>
