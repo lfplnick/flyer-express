@@ -54,7 +54,7 @@ angular.module('feAdmin', [])
 .controller('mainCtrl', function($scope){
 })
 
-.controller('feAdminAddLitCtrl', function($scope, dataService){
+.controller('feAdminAddLitCtrl', function($scope, $http, dataService){
   console.log("this isn't the console you're looking for...");
   $scope.defaults = {
     "type": "flyer",
@@ -63,7 +63,9 @@ angular.module('feAdmin', [])
     "dateEvent": new Date(),
     "isFeatured": false,
     "dateExpires": new Date(),
-    "locations": [{"id":-1, "location": ""}]
+    "locations": [{"id":-1, "location": ""}],
+    "thumb": "empty.jpg",
+    "myFile": ""
   };
 
   dataService.getFormats(function(res){
@@ -76,6 +78,24 @@ angular.module('feAdmin', [])
     $scope.locationList = res.data;
   });
 
+
+  $scope.uploadFile = function(){
+    var file = $scope.lit.myFile;
+    var uploadUrl = '/api/fup';
+    var fd = new FormData();
+    fd.append('file', file);
+    $http.post(uploadUrl, fd, {
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined}
+    })
+    .success(function(res){
+      console.log("File uploaded: " + res.filename);
+      $scope.lit.thumb = res.filename;
+    })
+    .error(function(){
+    });
+  };
+
   $scope.resetForm = function(){
     $scope.lit = {
       "type": $scope.defaults.type,
@@ -84,7 +104,9 @@ angular.module('feAdmin', [])
       "dateEvent": $scope.defaults.dateEvent,
       "isFeatured": $scope.defaults.isFeatured,
       "dateExpires": $scope.defaults.dateExpires,
-      "locations": [{"id":-1, "location": ""}]
+      "locations": [{"id":-1, "location": ""}],
+      "thumb": $scope.defaults.thumb,
+      "myFile": $scope.defaults.myFile
     };
 
     // $scope.lit.locations.push($scope.locationList[0]);
@@ -111,7 +133,7 @@ angular.module('feAdmin', [])
 
   $scope.resetLocations = function(){
     $scope.lit.locations = [{"id":-1, "location": ""}];
-  }
+  };
 })
 
 .controller('feAdminModLitCtrl', function($scope){
@@ -164,5 +186,21 @@ angular.module('feAdmin', [])
     replace: false
   }
 })
+
+.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}])
 
 ;
