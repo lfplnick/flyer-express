@@ -64,13 +64,13 @@
 }
 
 /* Circle buttons */
-#fe-add-lit-locations button.add,
+/*#fe-add-lit-locations button.add,
 #fe-add-lit-locations button.delete {
   border-radius: 100%;
   width: 30px;
   height: 30px;
   padding: 0;
-}
+}*/
 
 /* Location rows */
 #fe-add-lit-locations .row {
@@ -99,4 +99,18 @@
   font-weight: 800;
   font-size: 20px;
 
+}
+
+.locations-panel {
+  margin-top: 10px;
+}
+
+.locations-panel button.location-label {
+  cursor: default;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.locations-panel .btn-group {
+  margin: 5px;
 }

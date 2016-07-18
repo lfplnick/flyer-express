@@ -55,7 +55,6 @@ angular.module('feAdmin', ['ui.bootstrap'])
 })
 
 .controller('feAdminAddLitCtrl', function($scope, $http, dataService){
-  console.log("this isn't the console you're looking for...");
   $scope.defaults = {
     "type": "flyer",
     "title": "",
@@ -65,19 +64,22 @@ angular.module('feAdmin', ['ui.bootstrap'])
     "dateEvent": new Date(),
     "isFeatured": false,
     "dateExpires": new Date(),
-    "locations": [{"id":-1, "location": ""}],
+    "locations": [],
     "thumb": "empty.jpg",
     "thumbFile": ""
   };
 
+  $scope.selectedLocation = "";
+
   dataService.getFormats(function(res){
     $scope.formats = res.data;
     $scope.defaults.format = $scope.formats[2];
-    $scope.resetForm();
+    $scope.initForm();
   });
 
   dataService.getLocationList(function(res){
     $scope.locationList = res.data;
+    $scope.sortLocationList();
   });
 
 
@@ -98,9 +100,7 @@ angular.module('feAdmin', ['ui.bootstrap'])
     });
   };
 
-  $scope.resetForm = function(){
-    $("#newLit").modal('hide');
-
+  $scope.initForm = function(){
     $scope.lit = {
       "type": $scope.defaults.type,
       "title": $scope.defaults.title,
@@ -110,23 +110,45 @@ angular.module('feAdmin', ['ui.bootstrap'])
       "dateEvent": $scope.defaults.dateEvent,
       "isFeatured": $scope.defaults.isFeatured,
       "dateExpires": $scope.defaults.dateExpires,
-      "locations": [{"id":-1, "location": ""}],
+      "locations": [],
       "thumb": $scope.defaults.thumb,
       "thumbFile": $scope.defaults.thumbFile
     };
-
-    // $scope.lit.locations.push($scope.locationList[0]);
-    // $scope.lit.locations.push($scope.locationList[1]);
-    
   };
 
-  $scope.addLocationSelector = function(key){
+  $scope.resetForm = function(){
+    $("#newLit").modal('hide');
+
+    $scope.resetLocations();
+    $scope.initForm();
+  };
+
+  $scope.addLocation = function(){
     // $scope.lit.locations.push($scope.locationList[key]);
-    var length = $scope.lit.locations.length;
-    if ($scope.lit.locations[length - 1].location !== '') {
-      $scope.lit.locations.push({"id":-1, "location": ""});
-    }
+    // var length = $scope.lit.locations.length;
+
+    $scope.lit.locations.push($scope.selectedLocation);
+    $scope.sortSelectedLocations();
+    $scope.updateLocationList();
+    $scope.selectedLocation = "";
     // $scope.lit.locations.unshift($scope.locationList.splice(key, 1));    
+  };
+
+  $scope.addAllLocations = function(){
+    $scope.lit.locations.push.apply($scope.lit.locations, $scope.locationList);
+    $scope.sortSelectedLocations();
+    $scope.updateLocationList();
+    $scope.selectedLocation = "";
+  }
+
+  $scope.updateLocationList = function(){
+    for (var i_list = 0; i_list < $scope.locationList.length; i_list++) {
+      for (var i_location = 0; i_location < $scope.lit.locations.length; i_location++) {
+        if ($scope.locationList[i_list].id === $scope.lit.locations[i_location].id){
+          $scope.locationList.splice(i_list, 1);
+        }
+      }
+    }
   };
 
   $scope.newFlyer = function(){
@@ -173,16 +195,30 @@ angular.module('feAdmin', ['ui.bootstrap'])
   };
 
 
-  $scope.rmLocationSelector = function(key){
-    if ($scope.lit.locations.length > 1) {
-      $scope.lit.locations.splice(key, 1);
-    } else {
-      $scope.lit.locations = [{"id":-1, "location":''}];
-    }
+  $scope.removeLocation = function(key){
+    $scope.locationList.push($scope.lit.locations.splice(key, 1)[0]);
+    $scope.sortLocationList();
   };
 
   $scope.resetLocations = function(){
-    $scope.lit.locations = [{"id":-1, "location": ""}];
+    for (var i_location = 0; i_location < $scope.lit.locations.length; i_location++){
+      $scope.locationList.push($scope.lit.locations[i_location]);
+    }
+
+    $scope.sortLocationList();
+    $scope.lit.locations = [];
+  };
+
+  $scope.sortLocationList = function(){
+    $scope.locationList.sort(function(a,b){
+      return a.location.localeCompare(b.location);
+    });
+  };
+
+  $scope.sortSelectedLocations = function(){
+    $scope.lit.locations.sort(function(a,b){
+      return a.location.localeCompare(b.location);
+    });
   };
 })
 
