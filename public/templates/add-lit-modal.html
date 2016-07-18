@@ -7,7 +7,7 @@
         <h4 class="modal-title" id="myModalLabel">Add New Literature</h4>
       </div>
       <div class="modal-body">
-        <form name="addLit">
+        <form name="addLit" ng-submit="newFlyer()" novalidate>
 
           <!-- Flyer/Form radios -->
           <div class="form-group">
@@ -43,17 +43,19 @@
           <!-- Event date -->
           <div class="form-group">
             <div class="row">
-              <!-- ongoing check box -->
-              <div class="col-sm-3 col-md-2">
+              <div class="col-xs-12">
+                <!-- ongoing check box -->
                 <label class="checkbox-inline" for="isOngoing">
-                  <input type="checkbox" class="" name="isOngoing" ng-model="lit.isOngoing" ng-true-value="true" ng-false-value="false">Ongoing event
+                  <input type="checkbox" name="isOngoing" ng-model="lit.isOngoing" ng-true-value="true" ng-false-value="false">Ongoing event
                 </label>
               </div>
+            </div>
 
+            <div class="row">
               <!-- event date picker -->
               <div ng-hide="lit.isOngoing" class="col-xs-offset-1">
                 <label for="eventDate">Event date:</label>
-                <input name="eventDate" type="date" ng-model="lit.dateEvent">
+                <input  name="eventDate" type="date" ng-model="lit.dateEvent">
               </div>
             </div>
           </div>
@@ -62,16 +64,26 @@
           <div class="form-group">
             <div class="row">
               <!-- check box -->
-              <div class="col-sm-3 col-md-2">
+              <div class="col-xs-12">
                 <label class="checkbox-inline" for="isFeatured">
                   <input type="checkbox" class="" name="isFeatured" ng-model="lit.isFeatured" ng-true-value="true" ng-false-value="false">Featured
                 </label>
               </div>
+            </div>
 
-              <!-- date picker -->
+            <div class="row">
+              <!-- feat start date -->
+              <div ng-show="lit.isFeatured" class="col-xs-offset-1">
+                <label for="featStartDate">Start featuring on:</label>
+                <input name="featStartDate" type="date" ng-model="lit.featStart">
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- feat end date -->
               <div ng-show="lit.isFeatured" class="col-xs-offset-1">
                 <label for="featEndDate">No longer featured after:</label>
-                <input name="featEndDate" type="date" ng-model="lit.dateExpires">
+                <input name="featEndDate" type="date" ng-model="lit.featEnd">
               </div>
             </div>
           </div>
