@@ -55,7 +55,7 @@
               <!-- event date picker -->
               <div ng-hide="lit.isOngoing" class="col-xs-offset-1">
                 <label for="eventDate">Event date:</label>
-                <input  name="eventDate" type="date" ng-model="lit.dateEvent">
+                <input name="eventDate" ng-model="lit.dateEvent" ng-required="!lit.isOngoing" type="date" >
               </div>
             </div>
           </div>
@@ -75,7 +75,7 @@
               <!-- feat start date -->
               <div ng-show="lit.isFeatured" class="col-xs-offset-1">
                 <label for="featStartDate">Start featuring on:</label>
-                <input name="featStartDate" type="date" ng-model="lit.featStart">
+                <input name="featStartDate" ng-model="lit.featStart" ng-required="lit.isFeatured" type="date">
               </div>
             </div>
 
@@ -83,7 +83,7 @@
               <!-- feat end date -->
               <div ng-show="lit.isFeatured" class="col-xs-offset-1">
                 <label for="featEndDate">No longer featured after:</label>
-                <input name="featEndDate" type="date" ng-model="lit.featEnd">
+                <input name="featEndDate" ng-model="lit.featEnd" ng-required="lit.isFeatured" type="date">
               </div>
             </div>
           </div>
@@ -116,7 +116,7 @@
                 </div>
                 <div>
                   <label for="thumbFile">Select picture</label>
-                  <input name="thumbFile" type="file" file-model="lit.thumbFile"/>
+                  <input file-model="lit.thumbFile" name="thumbFile" required  type="file" />
                   <button type="button" class="btn btn-default" ng-click="uploadFile()">Preview</button>
                 </div>
               </div>
@@ -126,7 +126,7 @@
           <!-- File upload -->
           <div class="form-group">
             <label for="docFile">Select document file</label>
-            <input type="file" file-model="lit.documentFile" name="docFile" />
+            <input file-model="lit.documentFile" name="docFile" required type="file" />
           </div>
 
         </form>
