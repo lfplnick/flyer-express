@@ -7,37 +7,37 @@
         <h4 class="modal-title" id="myModalLabel">Add New Literature</h4>
       </div>
       <div class="modal-body">
-        <form>
+        <form name="addLit">
 
           <!-- Flyer/Form radios -->
           <div class="form-group">
-            <label for="radio-litType">Type of Literature</label>
+            <label for="type">Type of Literature</label>
             <div>
               <label class="radio-inline">
-                <input type="radio" ng-model="lit.type" name="radio-litType" value="flyer">Flyer
+                <input type="radio" ng-model="lit.type" name="type" value="flyer">Flyer
               </label>
               <label class="radio-inline">
-                <input type="radio" ng-model="lit.type" name="radio-litType" value="form">Form
+                <input type="radio" ng-model="lit.type" name="type" value="form">Form
               </label>
             </div>
           </div>
 
           <!-- Title -->
           <div class="form-group">
-            <label class="control-label" for="input-title">Title</label>
-            <input type="text" class="form-control" ng-model="lit.title" name="input-lit-title" id="input-title" placeholder="Flyer Title" required/>
+            <label class="control-label" for="title">Title</label>
+            <input type="text" class="form-control" ng-model="lit.title" name="title" id="input-title" placeholder="Flyer Title" required/>
           </div>
 
           <!-- Description -->
           <div class="form-group">
-            <label class="control-label">Description</label>
-            <textarea class="form-control" rows="3" ng-model="lit.desc" placeholder="Brief description of flyer..."></textarea>
+            <label class="control-label" for="desc">Description</label>
+            <textarea class="form-control" rows="3" name="desc" ng-model="lit.desc" placeholder="Brief description of flyer..."></textarea>
           </div>
 
           <!-- Format select box -->
           <div class="form-group">
-            <label for="select-format">Format</label>
-            <select name="select-format" class="form-control" ng-options="format as format.format for format in formats" ng-model="lit.format"></select>
+            <label for="format">Format</label>
+            <select name="format" class="form-control" ng-options="format as format.format for format in formats" ng-model="lit.format"></select>
           </div>
 
           <!-- Event date -->
@@ -45,15 +45,15 @@
             <div class="row">
               <!-- ongoing check box -->
               <div class="col-sm-3 col-md-2">
-                <label class="checkbox-inline">
-                  <input type="checkbox" class="" ng-model="lit.isOngoing" ng-true-value="true" ng-false-value="false">Ongoing event
+                <label class="checkbox-inline" for="isOngoing">
+                  <input type="checkbox" class="" name="isOngoing" ng-model="lit.isOngoing" ng-true-value="true" ng-false-value="false">Ongoing event
                 </label>
               </div>
 
               <!-- event date picker -->
               <div ng-hide="lit.isOngoing" class="col-xs-offset-1">
-                <label for="dateEvent">Event date:</label>
-                <input name="dateEvent" type="date" ng-model="lit.dateEvent">
+                <label for="eventDate">Event date:</label>
+                <input name="eventDate" type="date" ng-model="lit.dateEvent">
               </div>
             </div>
           </div>
@@ -63,15 +63,15 @@
             <div class="row">
               <!-- check box -->
               <div class="col-sm-3 col-md-2">
-                <label class="checkbox-inline">
-                  <input type="checkbox" class="" ng-model="lit.isFeatured" ng-true-value="true" ng-false-value="false">Featured
+                <label class="checkbox-inline" for="isFeatured">
+                  <input type="checkbox" class="" name="isFeatured" ng-model="lit.isFeatured" ng-true-value="true" ng-false-value="false">Featured
                 </label>
               </div>
 
               <!-- date picker -->
               <div ng-show="lit.isFeatured" class="col-xs-offset-1">
-                <label for="dateFeatExp">No longer featured after:</label>
-                <input name="dateFeatExp" type="date" ng-model="lit.dateExpires">
+                <label for="featEndDate">No longer featured after:</label>
+                <input name="featEndDate" type="date" ng-model="lit.dateExpires">
               </div>
             </div>
           </div>
@@ -87,7 +87,7 @@
                 <div ng-repeat="(key, location) in lit.locations">
                   <div class="row">
                     <button type="button" class="delete btn btn-danger" aria-label="remove location" ng-hide="location.location===''"><span class="glyphicon glyphicon-minus" aria-hidden="true" ng-click="rmLocationSelector(key)"></span></button>
-                    <select name="select-locations" class="form-control" ng-options="location as location.location for location in locationList" ng-model="lit.locations[key]" ng-change="addLocationSelector()" ng-show="location.location===''"/>
+                    <select name="locations" class="form-control" ng-options="location as location.location for location in locationList" ng-model="lit.locations[key]" ng-change="addLocationSelector()" ng-show="location.location===''"/>
                     <label ng-hide="location.location===''" style="vertical-align: center">{{location.location}}</label>
                   </div>
                 </div>
@@ -103,8 +103,8 @@
                   <img ng-src="/uploads/{{lit.thumb}}" alt="Form Thumbnail" class="img-thumbnail"/>
                 </div>
                 <div>
-                  <label for="file-pic">Select picture</label>
-                  <input type="file" file-model="lit.thumbFile"/>
+                  <label for="thumbFile">Select picture</label>
+                  <input name="thumbFile" type="file" file-model="lit.thumbFile"/>
                   <button type="button" class="btn btn-default" ng-click="uploadFile()">Preview</button>
                 </div>
               </div>
@@ -113,8 +113,8 @@
 
           <!-- File upload -->
           <div class="form-group">
-            <label for="file-pic">Select document file</label>
-            <input type="file" file-model="lit.documentFile" name="file-pic" />
+            <label for="docFile">Select document file</label>
+            <input type="file" file-model="lit.documentFile" name="docFile" />
           </div>
 
         </form>
