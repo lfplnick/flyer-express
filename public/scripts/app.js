@@ -49,7 +49,7 @@ angular.module('todoListApp', [])
 
 
 
-angular.module('feAdmin', [])
+angular.module('feAdmin', ['ui.bootstrap'])
 
 .controller('mainCtrl', function($scope){
 })
@@ -58,6 +58,8 @@ angular.module('feAdmin', [])
   console.log("this isn't the console you're looking for...");
   $scope.defaults = {
     "type": "flyer",
+    "title": "",
+    "desc": "",
     "format": "",
     "isOngoing": false,
     "dateEvent": new Date(),
@@ -97,8 +99,12 @@ angular.module('feAdmin', [])
   };
 
   $scope.resetForm = function(){
+    $("#newLit").modal('hide');
+
     $scope.lit = {
       "type": $scope.defaults.type,
+      "title": $scope.defaults.title,
+      "desc": $scope.defaults.desc,
       "format": $scope.defaults.format,
       "isOngoing": $scope.defaults.isOngoing,
       "dateEvent": $scope.defaults.dateEvent,
@@ -122,6 +128,50 @@ angular.module('feAdmin', [])
     }
     // $scope.lit.locations.unshift($scope.locationList.splice(key, 1));    
   };
+
+  $scope.newFlyer = function(){
+
+    console.log($("#input-title"));
+    var formGood = true;
+
+    formGood = $scope.validTitle() && formGood;
+    formGood = $scope.validEventDate() && formGood;
+    formGood = $scope.validFeatureDate() && formGood;
+    formGood = $scope.validLocations() && formGood;
+    formGood = $scope.validPicture() && formGood;
+    formGood = $scope.validDocFile() && formGood;
+
+    if (!formGood)
+      return;
+
+    $('#newLit').modal('hide');
+  };
+
+
+  $scope.validDocFile = function(){
+    return true;
+  };
+
+  $scope.validEventDate = function(){
+    return true;
+  };
+
+  $scope.validFeatureDate = function(){
+    return true;
+  };
+
+  $scope.validLocations = function(){
+    return true;
+  };
+
+  $scope.validPicture = function(){
+    return true;
+  };
+
+  $scope.validTitle = function(){
+    return true;
+  };
+
 
   $scope.rmLocationSelector = function(key){
     if ($scope.lit.locations.length > 1) {
