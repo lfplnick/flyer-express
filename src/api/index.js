@@ -33,6 +33,17 @@ router.get('/locations', function(req, res){
   });
 });
 
+router.post('/locations', function(req, res){
+  var location = req.body;
+  Locations.create(location, function(err, location){
+    if(err){
+      return res.status(500).json({err: err.message});
+    }
+
+    res.send(location);
+  });
+});
+
 
 
 
