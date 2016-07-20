@@ -102,7 +102,7 @@
                 <div class="panel-body">
                   <div class="btn-group" ng-repeat="(key, location) in lit.locations">
                     <button type="button" class="btn btn-default location-label" disabled>{{lit.locations[key].location}}</button>
-                    <button type="button" class="btn btn-danger" aria-label="remove location"><span class="glyphicon glyphicon-minus" aria-hidden="true" ng-click="removeLocation(key)"></span></button>
+                    <button type="button" class="btn btn-danger" aria-label="remove location" ng-click="removeLocation(key)"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
                   </div>
                 </div>
               </div>
