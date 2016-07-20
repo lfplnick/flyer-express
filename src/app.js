@@ -4,6 +4,7 @@ var express = require('express');
 var router = require('./api/index.js');
 
 require('./database');
+require('./seed');
 
 var app = express();
 

@@ -7,6 +7,7 @@ var fs = require('fs');
 var path = require('path');
 
 var todos = require('../../mock/todos.json');
+var Locations = require('../models/locations.js');
 
 
 var router = express.Router();
@@ -16,9 +17,26 @@ router.get('/todos', function(req, res){
   res.json({"todos": todos});
 });
 
-router.get('/admin', function(req, res){
-  res.send('Are you lost?');
+
+
+
+
+
+router.get('/locations', function(req, res){
+  // Locations.find({}, {id: true, location: true, _id: false}, {sort:{location:1}, limit:3}, function(err, locations){
+  Locations.find({}, {id: true, location: true, _id: false}, function(err, locations){
+    if(err){
+      return res.status(500).json({message: err.message});
+    }
+
+    res.json(locations);
+  });
 });
+
+
+
+
+
 
 router.post('/fup', function(req,res){
   var fstream;
