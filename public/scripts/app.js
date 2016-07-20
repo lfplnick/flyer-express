@@ -222,6 +222,8 @@ angular.module('feAdmin', ['ui.bootstrap'])
   };
 })
 
+.controller('feAdminLocationsModifyCtrl', function($scope, dataService){})
+
 .controller('feAdminModLitCtrl', function($scope){
   var defaults = {
     "isFeatured": false
@@ -272,6 +274,15 @@ angular.module('feAdmin', ['ui.bootstrap'])
     controller: 'feAdminModLitCtrl',
     replace: false
   }
+})
+
+.directive('feModalLocationsModify', function(){
+  return {
+    templateUrl: '/templates/modal-locations-modify.html',
+    scope: {},
+    controller: 'feAdminLocationsModifyCtrl',
+    replace: false
+  };
 })
 
 .directive('fileModel', ['$parse', function ($parse) {
