@@ -244,7 +244,8 @@ angular.module('feAdmin', ['ui.bootstrap'])
   };
 
   this.getLocationList = function(cb){
-    $http.get('/mock/locationList.json').then(cb);
+    // $http.get('/mock/locationList.json').then(cb);
+    $http.get('/api/locations').then(cb);
   };
 })
 
