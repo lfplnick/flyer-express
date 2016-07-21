@@ -3,7 +3,6 @@
 var mongoose = require('mongoose');
 
 var locationSchema = new mongoose.Schema({
-  id: Number,
   location: String
 });
 

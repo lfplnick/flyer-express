@@ -24,7 +24,7 @@ router.get('/todos', function(req, res){
 
 router.get('/locations', function(req, res){
   // Locations.find({}, {id: true, location: true, _id: false}, {sort:{location:1}, limit:3}, function(err, locations){
-  Locations.find({}, {id: true, location: true, _id: false}, function(err, locations){
+  Locations.find({}, {location: true}, function(err, locations){
     if(err){
       return res.status(500).json({message: err.message});
     }

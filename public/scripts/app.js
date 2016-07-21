@@ -144,7 +144,7 @@ angular.module('feAdmin', ['ui.bootstrap'])
   $scope.updateLocationList = function(){
     for (var i_list = 0; i_list < $scope.locationList.length; i_list++) {
       for (var i_location = 0; i_location < $scope.lit.locations.length; i_location++) {
-        if ($scope.locationList[i_list].id === $scope.lit.locations[i_location].id){
+        if ($scope.locationList[i_list]._id === $scope.lit.locations[i_location]._id){
           $scope.locationList.splice(i_list, 1);
         }
       }
@@ -218,9 +218,12 @@ angular.module('feAdmin', ['ui.bootstrap'])
 
 .controller('feAdminLocationsModifyCtrl', function($scope, dataService){
   $scope.locationList;
+  $scope.pendingList;
+
   dataService.getLocationList(function(res){
     $scope.locationList = res.data;
     dataService.sortLocationList($scope.locationList);
+    $scope.pendingList = $scope.locationList.slice();
   });
 })
 
