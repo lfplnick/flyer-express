@@ -7,14 +7,14 @@
         <h4 class="modal-title" id="modal-loc-mod-label">Locations</h4>
       </div>
       <div class="modal-body">
-        <form name="addLocation">
+        <form name="addLocation" novalidate>
 
           <!-- New Location -->
           <div class="form-group">
             <label class="control-label" for="location">New Location:</label>
             <div class="input-group">
               <!-- Location Name -->
-              <input type="text" class="form-control" ng-model="newLocation" name="location" id="input-location" placeholder="Location Name" required/>
+              <input type="text" class="form-control" ng-model="newLocation" name="location" id="input-location" placeholder="Location Name"/>
               <!-- Add button -->
               <span class="input-group-btn">
                 <button class="btn btn-success" type="button" ng-click="addPending()">Add</button>
@@ -42,20 +42,17 @@
               <!-- Buttons on right -->
               <div class="pull-right">
                 <!-- edit button -->
-                <a href class="btn btn-default" ng-click="editLocation(key)" ng-hide="location.editMode || location.isDel">Edit</a>
+                <button class="btn btn-default" ng-click="editLocation(key)" ng-hide="location.editMode || location.isDel">Edit</a>
                 <!-- delete button -->
-                <a href class="btn btn-danger" ng-click="deleteLocation(key)" ng-hide="location.editMode || location.isDel">Delete</a>
-                <a href class="btn btn-primary" ng-click="location.isDel = false" ng-show="location.isDel">Restore</a>
+                <button class="btn btn-danger" ng-click="deleteLocation(key)" ng-hide="location.editMode || location.isDel">Delete</a>
+                <!-- restore button -->
+                <button class="btn btn-primary" ng-click="location.isDel = false" ng-show="location.isDel">Restore</a>
               </div>
             </div>
           </div>
 
         </form>
       </div>
-
-      <hr>
-
-      {{newLocation}}
 
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal"">Close</button>
