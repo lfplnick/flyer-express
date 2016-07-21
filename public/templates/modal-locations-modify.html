@@ -31,14 +31,21 @@
               <!-- Input (for edit) -->
               <div class="input-group" ng-show="location.editMode">
                 <input type="text" class="form-control" ng-model="location.modValue"/>
+                <!-- input button group -->
                 <span class="input-group-btn">
+                  <!-- cancel button -->
                   <button class="btn btn-default" type="button" ng-click="cancelEdit(key)">Cancel</button>
+                  <!-- done button -->
                   <button class="btn btn-primary" type="button" ng-click="applyEdit(key)">Done</button>
               </div>
 
+              <!-- Buttons on right -->
               <div class="pull-right">
-                <a href class="btn btn-default" ng-click="editLocation(key)" ng-hide="location.editMode">Edit</a>
-                <a href class="btn btn-danger" ng-click="deleteLocation()" ng-hide="location.editMode">Delete</a>
+                <!-- edit button -->
+                <a href class="btn btn-default" ng-click="editLocation(key)" ng-hide="location.editMode || location.isDel">Edit</a>
+                <!-- delete button -->
+                <a href class="btn btn-danger" ng-click="deleteLocation(key)" ng-hide="location.editMode || location.isDel">Delete</a>
+                <a href class="btn btn-primary" ng-click="location.isDel = false" ng-show="location.isDel">Restore</a>
               </div>
             </div>
           </div>

@@ -229,6 +229,14 @@ angular.module('feAdmin')
       return true;
   };
 
+  $scope.deleteLocation = function(key){
+    if ($scope.pendingList[key].isNew){
+      $scope.pendingList.splice(key, 1);
+    } else {
+      $scope.pendingList[key].isDel = true;
+    }
+  };
+
   $scope.editLocation = function(key){
     console.log("setting editMode for location " + key);
     $scope.pendingList[key].modValue = $scope.pendingList[key].location;
