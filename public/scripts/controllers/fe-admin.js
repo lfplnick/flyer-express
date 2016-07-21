@@ -175,22 +175,13 @@ angular.module('feAdmin')
  ******************************************************************************/
 .controller('feAdminLocationsModifyCtrl', function($scope, dataService){
   $scope.locationList;
-  $scope.pendingList = [];
+  $scope.pendingList;
   $scope.newLocation;
 
   dataService.getLocationList(function(res){
     $scope.locationList = res.data;
     dataService.sortLocationList($scope.locationList);
-
-    $scope.locationList.forEach(function(location){
-      $scope.pendingList.push({
-        "_id"     : location._id,
-        "location": location.location,
-        "isMod"   : false,
-        "isDel"   : false,
-        "editMode": false
-      });
-    });
+    $scope.initPendingList();
   });
 
   $scope.addPending = function(){
@@ -209,6 +200,7 @@ angular.module('feAdmin')
     if (!$scope.pendingList[key].isNew) {
       $scope.pendingList[key].isMod = $scope.checkMod(key);
     }
+    dataService.sortLocationList($scope.pendingList);
   };
 
   $scope.cancelEdit = function(key){
@@ -237,10 +229,28 @@ angular.module('feAdmin')
     }
   };
 
+  $scope.discardChanges = function(){
+    $("#modify-locations").modal('hide');
+    $scope.initPendingList();
+  };
+
   $scope.editLocation = function(key){
-    console.log("setting editMode for location " + key);
+    // console.log("setting editMode for location " + key);
     $scope.pendingList[key].modValue = $scope.pendingList[key].location;
     $scope.pendingList[key].editMode = true;
+  };
+
+  $scope.initPendingList = function(){
+    $scope.pendingList = [];
+    $scope.locationList.forEach(function(location){
+      $scope.pendingList.push({
+        "_id"     : location._id,
+        "location": location.location,
+        "isMod"   : false,
+        "isDel"   : false,
+        "editMode": false
+      });
+    });
   };
 })
 
