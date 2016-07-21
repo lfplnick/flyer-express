@@ -37,16 +37,17 @@
                   <button class="btn btn-default" type="button" ng-click="cancelEdit(key)">Cancel</button>
                   <!-- done button -->
                   <button class="btn btn-primary" type="button" ng-click="applyEdit(key)">Done</button>
+                </span>
               </div>
 
               <!-- Buttons on right -->
               <div class="pull-right">
                 <!-- edit button -->
-                <button class="btn btn-default" ng-click="editLocation(key)" ng-hide="location.editMode || location.isDel">Edit</a>
+                <button class="btn btn-default" ng-click="editLocation(key)" ng-hide="location.editMode || location.isDel">Edit</button>
                 <!-- delete button -->
-                <button class="btn btn-danger" ng-click="deleteLocation(key)" ng-hide="location.editMode || location.isDel">Delete</a>
+                <button class="btn btn-danger" ng-click="deleteLocation(key)" ng-hide="location.editMode || location.isDel">Delete</button>
                 <!-- restore button -->
-                <button class="btn btn-primary" ng-click="location.isDel = false" ng-show="location.isDel">Restore</a>
+                <button class="btn btn-primary" ng-click="location.isDel = false" ng-show="location.isDel">Restore</button>
               </div>
             </div>
           </div>
