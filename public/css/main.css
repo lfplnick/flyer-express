@@ -114,3 +114,24 @@
 .locations-panel .btn-group {
   margin: 5px;
 }
+
+/* ========================================================================== */
+/* Admin - Locations Form                                                     */
+/* ========================================================================== */
+
+#modify-locations .location-list{
+  padding:5px 10px;
+  border-bottom: solid 2px black;
+}
+
+#modify-locations .del {
+  text-decoration: line-through;
+  color: #8b0000;
+}
+
+#modify-locations span.location-modified {
+  margin-left: 15px;
+  font-weight: 200;
+  font-style: italic;
+  color: #888;
+}

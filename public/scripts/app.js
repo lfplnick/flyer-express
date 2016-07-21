@@ -216,17 +216,76 @@ angular.module('feAdmin', ['ui.bootstrap'])
   };
 })
 
+
+/*******************************************************************************
+ *  Modify Locations Controller
+ ******************************************************************************/
 .controller('feAdminLocationsModifyCtrl', function($scope, dataService){
   $scope.locationList;
-  $scope.pendingList;
+  $scope.pendingList = [];
+  $scope.newLocation;
 
   dataService.getLocationList(function(res){
     $scope.locationList = res.data;
     dataService.sortLocationList($scope.locationList);
-    $scope.pendingList = $scope.locationList.slice();
+
+    $scope.locationList.forEach(function(location){
+      $scope.pendingList.push({
+        "_id"     : location._id,
+        "location": location.location,
+        "isMod"   : false,
+        "isDel"   : false,
+        "editMode": false
+      });
+    });
   });
+
+  $scope.addPending = function(){
+    $scope.pendingList.push({
+      "location": $scope.newLocation,
+      "isNew"   : true,
+      "editMode": false
+    });
+    $scope.newLocation = "";
+    dataService.sortLocationList($scope.pendingList);
+  };
+
+  $scope.applyEdit = function(key){
+    $scope.pendingList[key].location = $scope.pendingList[key].modValue;
+    $scope.pendingList[key].editMode = false;
+    if (!$scope.pendingList[key].isNew) {
+      $scope.pendingList[key].isMod = $scope.checkMod(key);
+    }
+  };
+
+  $scope.cancelEdit = function(key){
+    $scope.pendingList[key].editMode = false;
+    if (!$scope.pendingList[key].isNew) {
+      $scope.pendingList[key].isMod = $scope.checkMod(key);
+    }
+  };
+
+  $scope.checkMod = function(pendingKey){
+    var id = $scope.pendingList[pendingKey]._id;
+    var pendingLocation = $scope.pendingList[pendingKey].location;
+    var original = $.grep($scope.locationList, function(location){return location._id === id;})[0];
+
+    if (original.location === pendingLocation)
+      return false;
+    else
+      return true;
+  };
+
+  $scope.editLocation = function(key){
+    console.log("setting editMode for location " + key);
+    $scope.pendingList[key].modValue = $scope.pendingList[key].location;
+    $scope.pendingList[key].editMode = true;
+  };
 })
 
+/*******************************************************************************
+ *  Modify Literature Controller
+ ******************************************************************************/
 .controller('feAdminModLitCtrl', function($scope){
   var defaults = {
     "isFeatured": false

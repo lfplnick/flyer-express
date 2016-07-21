@@ -17,14 +17,29 @@
               <input type="text" class="form-control" ng-model="newLocation" name="location" id="input-location" placeholder="Location Name" required/>
               <!-- Add button -->
               <span class="input-group-btn">
-                <button class="btn btn-success" type="button">Add</button>
+                <button class="btn btn-success" type="button" ng-click="addPending()">Add</button>
               </span>
             </div>
           </div>
 
-          <div ng-repeat="(key, location) in locationList">
-            <div class="location-list">
-            {{location.location}}
+          <!-- Pending List -->
+          <div ng-repeat="(key, location) in pendingList">
+            <div class="location-list" ng-class="{'bg-success': location.isNew, 'bg-danger': location.isDel, 'bg-warning': location.isMod}">
+              <!-- Label -->
+              <label class="control-label" ng-class="{'del': location.isDel, 'text-warning': location.isMod}" ng-hide="location.editMode">{{location.location}}<span class="location-modified" ng-show="location.isMod">Modified</span></label>
+
+              <!-- Input (for edit) -->
+              <div class="input-group" ng-show="location.editMode">
+                <input type="text" class="form-control" ng-model="location.modValue"/>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="cancelEdit(key)">Cancel</button>
+                  <button class="btn btn-primary" type="button" ng-click="applyEdit(key)">Done</button>
+              </div>
+
+              <div class="pull-right">
+                <a href class="btn btn-default" ng-click="editLocation(key)" ng-hide="location.editMode">Edit</a>
+                <a href class="btn btn-danger" ng-click="deleteLocation()" ng-hide="location.editMode">Delete</a>
+              </div>
             </div>
           </div>
 
