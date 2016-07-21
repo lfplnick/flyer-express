@@ -44,6 +44,35 @@ router.post('/locations', function(req, res){
   });
 });
 
+router.put('/locations/:id/:action', function(req, res){
+  var id = req.params.id;
+  var action = req.params.action.toLowerCase();
+  var location = req.body;
+
+  if (action === "update"){
+    if (location && location._id !== id){
+      return res.status(500).json({err: "IDs don't match!"});
+    }
+
+    Locations.findByIdAndUpdate(id, location, {new: true}, function(err, location){
+      if(err){
+        return res.status(500).json({err: err.message});
+      }
+
+      res.json({"message": "Location updated successfully", "location": location});
+    });
+  }
+  else if (action === "delete"){
+    Locations.findByIdAndRemove(id, function(err, location){
+      if(err){
+        return res.status(500).json({err: err.message});
+      }
+
+      res.json({"message": "Location deleted successfully", "location": location});
+    });
+  }
+});
+
 
 
 
