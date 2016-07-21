@@ -194,6 +194,16 @@ angular.module('feAdmin')
     dataService.sortLocationList($scope.pendingList);
   };
 
+  $scope.applyChanges = function(){
+    dataService.saveLocations($scope.pendingList, function(){
+      dataService.getLocationList(function(res){
+        $scope.locationList = res.data;
+        dataService.sortLocationList($scope.locationList);
+        $scope.initPendingList();
+      });
+    });
+  };
+
   $scope.applyEdit = function(key){
     $scope.pendingList[key].location = $scope.pendingList[key].modValue;
     $scope.pendingList[key].editMode = false;
@@ -230,7 +240,6 @@ angular.module('feAdmin')
   };
 
   $scope.discardChanges = function(){
-    $("#modify-locations").modal('hide');
     $scope.initPendingList();
   };
 
