@@ -185,6 +185,9 @@ angular.module('feAdmin')
   });
 
   $scope.addPending = function(){
+    if ($scope.newLocation.length === 0)
+      return;
+
     $scope.pendingList.push({
       "location": $scope.newLocation,
       "isNew"   : true,
@@ -241,6 +244,7 @@ angular.module('feAdmin')
 
   $scope.discardChanges = function(){
     $scope.initPendingList();
+    $scope.newLocation = "";
   };
 
   $scope.editLocation = function(key){
