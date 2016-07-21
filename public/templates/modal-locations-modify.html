@@ -1,17 +1,38 @@
 <!-- Modal -->
-<div class="modal fade" id="modifyLocations" tabindex="-1" role="dialog" aria-labelledby="modal-loc-mod-label">
+<div class="modal fade" id="modify-locations" tabindex="-1" role="dialog" aria-labelledby="modal-loc-mod-label">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="modal-loc-mod-label">Modify Locations</h4>
+        <h4 class="modal-title" id="modal-loc-mod-label">Locations</h4>
       </div>
       <div class="modal-body">
-        <h3>You want to do <em>what???</em></h3>
+        <form name="addLocation">
+
+          <!-- New Location -->
+          <div class="form-group">
+            <label class="control-label" for="location">New Location:</label>
+            <div class="input-group">
+              <!-- Location Name -->
+              <input type="text" class="form-control" ng-model="newLocation" name="location" id="input-location" placeholder="Location Name" required/>
+              <!-- Add button -->
+              <span class="input-group-btn">
+                <button class="btn btn-success" type="button">Add</button>
+              </span>
+            </div>
+          </div>
+
+
+        </form>
       </div>
+
+      <hr>
+
+      {{newLocation}}
+
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close Now</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Discard Changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Submit Changes</button>
       </div>
     </div>
   </div>
