@@ -79,7 +79,7 @@ angular.module('feAdmin', ['ui.bootstrap'])
 
   dataService.getLocationList(function(res){
     $scope.locationList = res.data;
-    $scope.sortLocationList();
+    dataService.sortLocationList($scope.locationList);
   });
 
 
@@ -197,7 +197,7 @@ angular.module('feAdmin', ['ui.bootstrap'])
 
   $scope.removeLocation = function(key){
     $scope.locationList.push($scope.lit.locations.splice(key, 1)[0]);
-    $scope.sortLocationList();
+    dataService.sortLocationList($scope.locationList);
   };
 
   $scope.resetLocations = function(){
@@ -205,14 +205,8 @@ angular.module('feAdmin', ['ui.bootstrap'])
       $scope.locationList.push($scope.lit.locations[i_location]);
     }
 
-    $scope.sortLocationList();
+    dataService.sortLocationList($scope.locationList);
     $scope.lit.locations = [];
-  };
-
-  $scope.sortLocationList = function(){
-    $scope.locationList.sort(function(a,b){
-      return a.location.localeCompare(b.location);
-    });
   };
 
   $scope.sortSelectedLocations = function(){
@@ -222,7 +216,13 @@ angular.module('feAdmin', ['ui.bootstrap'])
   };
 })
 
-.controller('feAdminLocationsModifyCtrl', function($scope, dataService){})
+.controller('feAdminLocationsModifyCtrl', function($scope, dataService){
+  $scope.locationList;
+  dataService.getLocationList(function(res){
+    $scope.locationList = res.data;
+    dataService.sortLocationList($scope.locationList);
+  });
+})
 
 .controller('feAdminModLitCtrl', function($scope){
   var defaults = {
@@ -248,6 +248,12 @@ angular.module('feAdmin', ['ui.bootstrap'])
   this.getLocationList = function(cb){
     // $http.get('/mock/locationList.json').then(cb);
     $http.get('/api/locations').then(cb);
+  };
+
+  this.sortLocationList = function(list){
+    list.sort(function(a,b){
+      return a.location.localeCompare(b.location);
+    });
   };
 })
 
