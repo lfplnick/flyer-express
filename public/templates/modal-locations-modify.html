@@ -23,35 +23,39 @@
           </div>
 
           <!-- Pending List -->
-          <div ng-repeat="(key, location) in pendingList">
-            <div class="location-list" ng-class="{'bg-success': location.isNew, 'bg-danger': location.isDel, 'bg-warning': location.isMod}">
-              <!-- Label -->
-              <label class="control-label" ng-class="{'del': location.isDel, 'text-warning': location.isMod}" ng-hide="location.editMode">{{location.location}}<span class="location-modified" ng-show="location.isMod">Modified</span></label>
+          <div class="pending-list">
+            <div class="location-list" ng-repeat="(key, location) in pendingList">
+              <div class="location-item" ng-class="{'bg-success': location.isNew, 'bg-danger': location.isDel, 'bg-warning': location.isMod}">
+                <!-- Label -->
+                <div class="location-label">
+                  <label ng-class="{'del': location.isDel, 'text-warning': location.isMod}" ng-hide="location.editMode">{{location.location}}<span class="location-modified" ng-show="location.isMod">Modified</span></label>
+                </div>
 
-              <!-- Input (for edit) -->
-              <div class="input-group" ng-show="location.editMode">
-                <input type="text" class="form-control" ng-model="location.modValue"/>
-                <!-- input button group -->
-                <span class="input-group-btn">
-                  <!-- cancel button -->
-                  <button class="btn btn-default" type="button" ng-click="cancelEdit(key)">Cancel</button>
-                  <!-- done button -->
-                  <button class="btn btn-primary" type="button" ng-click="applyEdit(key)">Done</button>
-                </span>
-              </div>
+                <!-- Input (for edit) -->
+                <div class="input-group" ng-show="location.editMode">
+                  <input type="text" class="form-control" ng-model="location.modValue"/>
+                  <!-- input button group -->
+                  <span class="input-group-btn">
+                    <!-- cancel button -->
+                    <button class="btn btn-default" type="button" ng-click="cancelEdit(key)">Cancel</button>
+                    <!-- done button -->
+                    <button class="btn btn-primary" type="button" ng-click="applyEdit(key)">Done</button>
+                  </span>
+                </div>
+                
 
-              <!-- Buttons on right -->
-              <div class="pull-right">
-                <!-- edit button -->
-                <button class="btn btn-default" ng-click="editLocation(key)" ng-hide="location.editMode || location.isDel">Edit</button>
-                <!-- delete button -->
-                <button class="btn btn-danger" ng-click="deleteLocation(key)" ng-hide="location.editMode || location.isDel">Delete</button>
-                <!-- restore button -->
-                <button class="btn btn-primary" ng-click="location.isDel = false" ng-show="location.isDel">Restore</button>
+                <!-- Buttons on right -->
+                <div class="location-buttons">
+                  <!-- edit button -->
+                  <button class="btn btn-default" ng-click="editLocation(key)" ng-hide="location.editMode || location.isDel">Edit</button>
+                  <!-- delete button -->
+                  <button class="btn btn-danger" ng-click="deleteLocation(key)" ng-hide="location.editMode || location.isDel">Delete</button>
+                  <!-- restore button -->
+                  <button class="btn btn-primary" ng-click="location.isDel = false" ng-show="location.isDel">Restore</button>
+                </div>
               </div>
             </div>
           </div>
-
         </form>
       </div>
 
