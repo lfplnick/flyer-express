@@ -1,0 +1,69 @@
+<!-- Modal -->
+<div class="modal fade" id="modify-locations" tabindex="-1" role="dialog" aria-labelledby="modal-loc-mod-label">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modal-loc-mod-label">Locations</h4>
+      </div>
+      <div class="modal-body">
+        <form name="addLocation" novalidate>
+
+          <!-- New Location -->
+          <div class="form-group">
+            <label class="control-label" for="location">New Location:</label>
+            <div class="input-group">
+              <!-- Location Name -->
+              <input type="text" class="form-control" ng-model="newLocation" name="location" id="input-location" placeholder="Location Name"/>
+              <!-- Add button -->
+              <span class="input-group-btn">
+                <button class="btn btn-success" type="button" ng-click="addPending()">Add</button>
+              </span>
+            </div>
+          </div>
+
+          <!-- Pending List -->
+          <div class="pending-list">
+            <div class="location-list" ng-repeat="(key, location) in pendingList">
+              <div class="location-item" ng-class="{'bg-success': location.isNew, 'bg-danger': location.isDel, 'bg-warning': location.isMod}">
+                <!-- Label -->
+                <div class="location-label">
+                  <label ng-class="{'del': location.isDel, 'text-warning': location.isMod}" ng-hide="location.editMode">{{location.location}}<span class="location-modified" ng-show="location.isMod">Modified</span></label>
+                </div>
+
+                <!-- Input (for edit) -->
+                <div class="input-group" ng-show="location.editMode">
+                  <input type="text" class="form-control" ng-model="location.modValue"/>
+                  <!-- input button group -->
+                  <span class="input-group-btn">
+                    <!-- cancel button -->
+                    <button class="btn btn-default" type="button" ng-click="cancelEdit(key)">Cancel</button>
+                    <!-- done button -->
+                    <button class="btn btn-primary" type="button" ng-click="applyEdit(key)">Done</button>
+                  </span>
+                </div>
+                
+
+                <!-- Buttons on right -->
+                <div class="location-buttons">
+                  <!-- edit button -->
+                  <button class="btn btn-default" ng-click="editLocation(key)" ng-hide="location.editMode || location.isDel">Edit</button>
+                  <!-- delete button -->
+                  <button class="btn btn-danger" ng-click="deleteLocation(key)" ng-hide="location.editMode || location.isDel">Delete</button>
+                  <!-- restore button -->
+                  <button class="btn btn-primary" ng-click="location.isDel = false" ng-show="location.isDel">Restore</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal"">Close</button>
+        <button type="button" class="btn btn-default" ng-click="discardChanges()">Discard Changes</button>
+        <button type="button" class="btn btn-primary" ng-click="applyChanges()">Submit Changes</button>
+      </div>
+    </div>
+  </div>
+</div>

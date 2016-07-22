@@ -114,3 +114,45 @@
 .locations-panel .btn-group {
   margin: 5px;
 }
+
+/* ========================================================================== */
+/* Admin - Locations Form                                                     */
+/* ========================================================================== */
+
+#modify-locations .pending-list{
+  border-top: solid 1px #ddd;
+}
+
+#modify-locations .location-item{
+  padding:5px 10px;
+  display: table;
+  width: 100%;
+  border-bottom: solid 1px #ddd;
+}
+
+#modify-locations .location-item .location-label{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#modify-locations .location-item .location-label label{
+  margin:0;
+  font-size: 16px;
+}
+
+#modify-locations .location-item .location-buttons{
+  display: table-cell;
+  float: right;
+}
+
+#modify-locations .del {
+  text-decoration: line-through;
+  color: #8b0000;
+}
+
+#modify-locations span.location-modified {
+  margin-left: 15px;
+  font-weight: 200;
+  font-style: italic;
+  color: #888;
+}

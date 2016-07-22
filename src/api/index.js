@@ -24,13 +24,53 @@ router.get('/todos', function(req, res){
 
 router.get('/locations', function(req, res){
   // Locations.find({}, {id: true, location: true, _id: false}, {sort:{location:1}, limit:3}, function(err, locations){
-  Locations.find({}, {id: true, location: true, _id: false}, function(err, locations){
+  Locations.find({}, {location: true}, function(err, locations){
     if(err){
       return res.status(500).json({message: err.message});
     }
 
     res.json(locations);
   });
+});
+
+router.post('/locations', function(req, res){
+  var location = req.body;
+  Locations.create(location, function(err, location){
+    if(err){
+      return res.status(500).json({err: err.message});
+    }
+
+    res.send(location);
+  });
+});
+
+router.put('/locations/:id/:action', function(req, res){
+  var id = req.params.id;
+  var action = req.params.action.toLowerCase();
+  var location = req.body;
+
+  if (action === "update"){
+    if (location && location._id !== id){
+      return res.status(500).json({err: "IDs don't match!"});
+    }
+
+    Locations.findByIdAndUpdate(id, location, {new: true}, function(err, location){
+      if(err){
+        return res.status(500).json({err: err.message});
+      }
+
+      res.json({"message": "Location updated successfully", "location": location});
+    });
+  }
+  else if (action === "delete"){
+    Locations.findByIdAndRemove(id, function(err, location){
+      if(err){
+        return res.status(500).json({err: err.message});
+      }
+
+      res.json({"message": "Location deleted successfully", "location": location});
+    });
+  }
 });
 
 
