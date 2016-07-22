@@ -1,22 +1,24 @@
-  <div class="container" style="padding-top:10px">
+  <div class="container">
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <img class="banner-brand" alt="F-Express" src="/img/flyer-express-banner.png" height="40" width="150"/>
+        </a>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-flyers-top" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">F-Express</a>
       </div><!-- / .navbar-header -->
 
-      <div class="collapse navbar-collapse" id="nav-flyers-top">
+      <div class="collapse nav-pills navbar-collapse" id="nav-flyers-top">
         <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="#Admin">Admin</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Flyers <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#Add" ng-click="navAdminAdd">Add</a></li>
+              <li><a href="#Add" data-toggle="modal" data-target="#newLit">Add</a></li>
               <li><a href="#Delete">Delete</a></li>
               <li><a href="#Modify">Modify</a><li>
             </ul>
@@ -24,5 +26,4 @@
         </ul>
       </div><!-- / .navbar-collapse -->
     </nav>
-  </div><!-- / .container-fluid -->
-
+  </div>

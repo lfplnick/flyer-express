@@ -1,0 +1,6 @@
+[
+  {"id": 0, "format": "Brochure (Bi-Fold)"},
+  {"id": 1, "format": "Brochure (Tri-Fold)"},
+  {"id": 2, "format": "Full Page"},
+  {"id": 3, "format": "Rack Card"}
+]
